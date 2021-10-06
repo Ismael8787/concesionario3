@@ -7,6 +7,7 @@ import { createRequestOption } from 'app/core/request/request-util';
 import { isPresent } from 'app/core/util/operators';
 import { Pagination } from 'app/core/request/request.model';
 import { IUser, getUserIdentifier } from './user.model';
+import { AccountService } from 'app/core/auth/account.service';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
@@ -18,6 +19,11 @@ export class UserService {
     const options = createRequestOption(req);
     return this.http.get<IUser[]>(this.resourceUrl, { params: options, observe: 'response' });
   }
+
+  // queryVendedores(req?: Pagination): Observable<HttpResponse<IUser[]>> {
+  //   const options = createRequestOption(req);
+  //   return this.http.get<IUser[]>(this.resourceUrl+'Vendedores', { params: options, observe: 'response' });
+  // }
 
   addUserToCollectionIfMissing(userCollection: IUser[], ...usersToCheck: (IUser | null | undefined)[]): IUser[] {
     const users: IUser[] = usersToCheck.filter(isPresent);

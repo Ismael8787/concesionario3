@@ -178,6 +178,16 @@ public class UserResource {
         return pageable.getSort().stream().map(Sort.Order::getProperty).allMatch(ALLOWED_ORDERED_PROPERTIES::contains);
     }
 
+    // @GetMapping("/usersVendedores")
+
+    // public ResponseEntity<List<AdminUserDTO>> getAllUsersDisponibles(Pageable pageable) {
+    //     log.debug("REST request to get all User for an admin");
+
+    //     final List<AdminUserDTO> page = userService.getAllManagedUsersV();
+    //     //  HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+    //     return new ResponseEntity<>(page,HttpStatus.OK);
+    // }
+
     /**
      * {@code GET /admin/users/:login} : get the "login" user.
      *

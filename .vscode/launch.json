@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-Concesionario3App<concesionario-3>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "es.melit.concesionario3.Concesionario3App",
+            "projectName": "concesionario-3",
+            "args": ""
+        }
+    ]
+}

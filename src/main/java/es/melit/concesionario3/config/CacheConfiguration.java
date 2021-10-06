@@ -48,6 +48,8 @@ public class CacheConfiguration {
             createCache(cm, es.melit.concesionario3.domain.User.class.getName());
             createCache(cm, es.melit.concesionario3.domain.Authority.class.getName());
             createCache(cm, es.melit.concesionario3.domain.User.class.getName() + ".authorities");
+            createCache(cm, es.melit.concesionario3.domain.Coche.class.getName());
+            createCache(cm, es.melit.concesionario3.domain.Venta.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }
