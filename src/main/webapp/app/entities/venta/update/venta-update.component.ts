@@ -33,6 +33,7 @@ export class VentaUpdateComponent implements OnInit {
     compradorId: [],
     vendedorId: [],
     coche: [],
+    comprador: [],
   });
   account: Account | null | undefined;
 
@@ -98,14 +99,15 @@ export class VentaUpdateComponent implements OnInit {
       fecha: venta.fecha,
       numFactura: venta.numFactura,
       precioTotal: venta.precioTotal,
-      compradorId: venta.compradorId,
+      // compradorId: venta.compradorId,
       vendedorId: venta.vendedorId,
       coche: venta.coche,
+      comprador: venta.comprador,
     });
 
     this.usersSharedCollection = this.userService.addUserToCollectionIfMissing(
       this.usersSharedCollection,
-      venta.compradorId,
+      // venta.compradorId,
       venta.vendedorId
     );
   }
@@ -139,7 +141,7 @@ export class VentaUpdateComponent implements OnInit {
       fecha: this.editForm.get(['fecha'])!.value,
       numFactura: this.editForm.get(['numFactura'])!.value,
       precioTotal: this.editForm.get(['precioTotal'])!.value,
-      compradorId: this.editForm.get(['compradorId'])!.value,
+      comprador: this.editForm.get(['comprador'])!.value,
       vendedorId: this.account,
       coche: this.editForm.get(['coche'])!.value.id,
     };

@@ -69,9 +69,10 @@ public class VentaResource {
         }
         Venta result = ventaService.save(venta);
         this.cocheService.cambiarValor(venta);
-        // User usuario=venta.getCompradorId();
-        // AdminUserDTO user=new AdminUserDTO(usuario);
-        // this.userResource.createUser(user);
+        User usuario = new User();
+        usuario.setLogin(venta.getComprador());
+        AdminUserDTO user = new AdminUserDTO(usuario);
+        this.userResource.createUser(user);
         return ResponseEntity
             .created(new URI("/api/ventas/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))

@@ -23,9 +23,9 @@
             <column name="precio_total" type="double">
                 <constraints nullable="false" />
             </column>
-            <column name="comprador_id_id" type="bigint">
+             <column name="comprador" type="varchar(25)">
                 <constraints nullable="true" />
-            </column>
+            </column> 
             <column name="vendedor_id_id" type="bigint">
                 <constraints nullable="true" />
             </column>

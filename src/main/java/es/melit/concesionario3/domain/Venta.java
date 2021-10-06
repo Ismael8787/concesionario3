@@ -33,8 +33,8 @@ public class Venta implements Serializable {
     @Column(name = "precio_total", nullable = false)
     private Double precioTotal;
 
-    @ManyToOne
-    private User compradorId;
+    @Column(name = "comprador")
+    private String comprador;
 
     @ManyToOne
     private User vendedorId;
@@ -95,21 +95,16 @@ public class Venta implements Serializable {
         this.precioTotal = precioTotal;
     }
 
-    public User getCompradorId() {
-        return this.compradorId;
-    }
-
-    public Venta compradorId(User user) {
-        this.setCompradorId(user);
-        return this;
-    }
-
-    public void setCompradorId(User user) {
-        this.compradorId = user;
-    }
-
     public User getVendedorId() {
         return this.vendedorId;
+    }
+
+    public String getComprador() {
+        return comprador;
+    }
+
+    public void setComprador(String comprador) {
+        this.comprador = comprador;
     }
 
     public Venta vendedorId(User user) {

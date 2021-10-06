@@ -17,14 +17,7 @@
     }
   ],
   "relationships": [
-    {
-      "relationshipName": "compradorId",
-      "otherEntityName": "user",
-      "relationshipType": "many-to-one",
-      "otherEntityField": "login",
-      "ownerSide": true,
-      "otherEntityRelationshipName": "venta"
-    },
+  
     {
       "relationshipName": "vendedorId",
       "otherEntityName": "user",

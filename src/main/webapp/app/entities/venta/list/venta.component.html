@@ -42,8 +42,8 @@
           <th scope="col" jhiSortBy="precioTotal">
             <span jhiTranslate="concesionario3App.venta.precioTotal">Precio Total</span> <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" jhiSortBy="compradorId.login">
-            <span jhiTranslate="concesionario3App.venta.compradorId">Comprador Id</span> <fa-icon icon="sort"></fa-icon>
+          <th scope="col" jhiSortBy="comprador">
+            <span jhiTranslate="concesionario3App.venta.comprador">Comprador </span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" jhiSortBy="vendedorId.login">
             <span jhiTranslate="concesionario3App.venta.vendedorId">Vendedor Id</span> <fa-icon icon="sort"></fa-icon>
@@ -60,7 +60,7 @@
           <td>{{ venta.numFactura }}</td>
           <td>{{ venta.precioTotal }}</td>
           <td>
-            {{ venta.compradorId?.login }}
+            {{ venta.comprador }}
           </td>
           <td>
             {{ venta.vendedorId?.login }}

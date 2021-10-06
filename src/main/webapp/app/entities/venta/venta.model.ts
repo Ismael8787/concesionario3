@@ -7,9 +7,9 @@ export interface IVenta {
   fecha?: dayjs.Dayjs;
   numFactura?: string;
   precioTotal?: number;
-  compradorId?: IUser | null;
   vendedorId?: IUser | null;
   coche?: number;
+  comprador?: string;
 }
 
 export class Venta implements IVenta {
@@ -18,9 +18,10 @@ export class Venta implements IVenta {
     public fecha?: dayjs.Dayjs,
     public numFactura?: string,
     public precioTotal?: number,
-    public compradorId?: IUser | null,
+
     public vendedorId?: IUser | null,
-    public coche?: number
+    public coche?: number,
+    public comprador?: string
   ) {}
 }
 

@@ -105,25 +105,8 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" jhiTranslate="concesionario3App.venta.compradorId" for="field_compradorId">Comprador Id</label>
-          <!--   <input
-            type="text"
-            class="form-control"
-            name="compradorId"
-            id="field_compradorId"
-            data-cy="compradorId"
-            formControlName="compradorId"
-          /> -->
-
-          <select class="form-control" id="field_compradorId" data-cy="compradorId" name="compradorId" formControlName="compradorId">
-            <option [ngValue]="null"></option>
-            <option
-              [ngValue]="userOption.id === editForm.get('compradorId')!.value?.id ? editForm.get('compradorId')!.value : userOption"
-              *ngFor="let userOption of usersSharedCollection; trackBy: trackUserById"
-            >
-              {{ userOption.login }}
-            </option>
-          </select>
+          <label class="form-control-label" jhiTranslate="concesionario3App.venta.comprador" for="field_comprador">Comprador </label>
+          <input type="text" class="form-control" name="comprador" id="field_comprador" data-cy="comprador" formControlName="comprador" />
         </div>
       </div>
 

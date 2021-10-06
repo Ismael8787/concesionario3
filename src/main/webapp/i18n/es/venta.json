@@ -21,9 +21,9 @@
       "fecha": "Fecha",
       "numFactura": "Num Factura",
       "precioTotal": "Precio Total",
-      "compradorId": "Comprador Id",
       "vendedorId": "Vendedor Id",
-      "coche": "Coche"
+      "coche": "Coche",
+      "comprador": "comprador"
     }
   }
 }
