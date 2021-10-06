@@ -1,7 +1,9 @@
 package es.melit.concesionario3.web.rest;
 
+import es.melit.concesionario3.domain.Authority;
 import es.melit.concesionario3.domain.User;
 import es.melit.concesionario3.repository.UserRepository;
+import es.melit.concesionario3.security.AuthoritiesConstants;
 import es.melit.concesionario3.security.SecurityUtils;
 import es.melit.concesionario3.service.MailService;
 import es.melit.concesionario3.service.UserService;
@@ -48,6 +50,7 @@ public class AccountResource {
         this.mailService = mailService;
     }
 
+    //TODO: FAlla arreglar esto
     /**
      * {@code POST  /register} : register the user.
      *
@@ -63,6 +66,12 @@ public class AccountResource {
             throw new InvalidPasswordException();
         }
         User user = userService.registerUser(managedUserVM, managedUserVM.getPassword());
+
+        Set<Authority> roles = new TreeSet<>();
+        Authority rol = new Authority();
+        rol.setName("ROLE_VENDEDOR");
+        roles.add(rol);
+        user.setAuthorities(roles);
         mailService.sendActivationEmail(user);
     }
 

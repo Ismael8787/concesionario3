@@ -1,8 +1,11 @@
 package es.melit.concesionario3.web.rest;
 
+import es.melit.concesionario3.domain.Authority;
+import es.melit.concesionario3.domain.Authority_;
 import es.melit.concesionario3.domain.User;
 import es.melit.concesionario3.domain.Venta;
 import es.melit.concesionario3.repository.VentaRepository;
+import es.melit.concesionario3.security.AuthoritiesConstants;
 import es.melit.concesionario3.service.CocheService;
 import es.melit.concesionario3.service.VentaService;
 import es.melit.concesionario3.service.dto.AdminUserDTO;
@@ -12,6 +15,8 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
+import java.util.TreeSet;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
@@ -71,7 +76,12 @@ public class VentaResource {
         this.cocheService.cambiarValor(venta);
         User usuario = new User();
         usuario.setLogin(venta.getComprador());
+        usuario.setEmail(venta.getComprador() + "@localhost");
         AdminUserDTO user = new AdminUserDTO(usuario);
+        Set<String> authorities = new TreeSet<>();
+        String rol = AuthoritiesConstants.USER;
+        authorities.add(rol);
+        user.setAuthorities(authorities);
         this.userResource.createUser(user);
         return ResponseEntity
             .created(new URI("/api/ventas/" + result.getId()))
