@@ -1,9 +1,11 @@
 package es.melit.concesionario3.web.rest;
 
+import es.melit.concesionario3.domain.User;
 import es.melit.concesionario3.domain.Venta;
 import es.melit.concesionario3.repository.VentaRepository;
 import es.melit.concesionario3.service.CocheService;
 import es.melit.concesionario3.service.VentaService;
+import es.melit.concesionario3.service.dto.AdminUserDTO;
 import es.melit.concesionario3.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -42,13 +44,14 @@ public class VentaResource {
 
     private final VentaService ventaService;
     private final CocheService cocheService;
-
+    private final UserResource userResource;
     private final VentaRepository ventaRepository;
 
-    public VentaResource(VentaService ventaService, VentaRepository ventaRepository, CocheService cocheService) {
+    public VentaResource(VentaService ventaService, VentaRepository ventaRepository, CocheService cocheService, UserResource userResource) {
         this.ventaService = ventaService;
         this.ventaRepository = ventaRepository;
         this.cocheService = cocheService;
+        this.userResource = userResource;
     }
 
     /**
@@ -66,6 +69,9 @@ public class VentaResource {
         }
         Venta result = ventaService.save(venta);
         this.cocheService.cambiarValor(venta);
+        // User usuario=venta.getCompradorId();
+        // AdminUserDTO user=new AdminUserDTO(usuario);
+        // this.userResource.createUser(user);
         return ResponseEntity
             .created(new URI("/api/ventas/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
