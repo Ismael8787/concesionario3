@@ -10,6 +10,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 /**
  * A Coche.
  */
+
 @Entity
 @Table(name = "coche")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)

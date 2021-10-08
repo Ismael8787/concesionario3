@@ -1,8 +1,11 @@
 package es.melit.concesionario3.web.rest;
 
 import es.melit.concesionario3.domain.Coche;
+import es.melit.concesionario3.domain.CocheSpect;
 import es.melit.concesionario3.repository.CocheRepository;
+import es.melit.concesionario3.repository.CocheSpecification;
 import es.melit.concesionario3.service.CocheService;
+import es.melit.concesionario3.service.dto.*;
 import es.melit.concesionario3.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -19,8 +22,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.web.util.UriComponentsBuilder;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.PaginationUtil;
 import tech.jhipster.web.util.ResponseUtil;
@@ -143,9 +148,9 @@ public class CocheResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of coches in body.
      */
     @GetMapping("/coches")
-    public ResponseEntity<List<Coche>> getAllCoches(Pageable pageable) {
+    public ResponseEntity<List<Coche>> getAllCoches(CriteriaDTO criteria, Pageable pageable) {
         log.debug("REST request to get a page of Coches");
-        Page<Coche> page = cocheService.findAll(pageable);
+        Page<Coche> page = cocheRepository.findAll(CocheSpecification.searchingParam(criteria.getMarca()), pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
@@ -158,6 +163,13 @@ public class CocheResource {
         return ResponseEntity.ok().body(page);
     }
 
+    // @GetMapping("/cochesE")
+    // public ResponseEntity<Page<Coche>> getCocheMarca(Pageable pageable,@RequestParam MultiValueMap<String, String> queryParams, UriComponentsBuilder uriBuilder,String Marca) {
+    //     log.debug("REST request to get a page of Titulos by criteria: {}");
+    //     Page<Coche> page = this.cocheRepository.findAll(CocheSpecification.searchingParam(Marca),pageable);
+    //  HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(uriBuilder.queryParams(queryParams), page);
+    //     return ResponseEntity.ok().headers(headers).body(page);
+    // }
     /**
      * {@code GET  /coches/:id} : get the "id" coche.
      *

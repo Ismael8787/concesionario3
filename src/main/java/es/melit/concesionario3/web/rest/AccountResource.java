@@ -50,7 +50,6 @@ public class AccountResource {
         this.mailService = mailService;
     }
 
-    //TODO: FAlla arreglar esto
     /**
      * {@code POST  /register} : register the user.
      *
@@ -65,13 +64,9 @@ public class AccountResource {
         if (isPasswordLengthInvalid(managedUserVM.getPassword())) {
             throw new InvalidPasswordException();
         }
+
         User user = userService.registerUser(managedUserVM, managedUserVM.getPassword());
 
-        Set<Authority> roles = new TreeSet<>();
-        Authority rol = new Authority();
-        rol.setName("ROLE_VENDEDOR");
-        roles.add(rol);
-        user.setAuthorities(roles);
         mailService.sendActivationEmail(user);
     }
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpHeaders, HttpResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -23,6 +23,7 @@ export class CocheComponent implements OnInit {
   predicate!: string;
   ascending!: boolean;
   ngbPaginationPage = 1;
+  searchString!: string;
 
   constructor(
     protected cocheService: CocheService,
@@ -40,6 +41,7 @@ export class CocheComponent implements OnInit {
         page: pageToLoad - 1,
         size: this.itemsPerPage,
         sort: this.sort(),
+        ...{ marca: 'Morado' },
       })
       .subscribe(
         (res: HttpResponse<ICoche[]>) => {
@@ -52,6 +54,26 @@ export class CocheComponent implements OnInit {
         }
       );
   }
+
+  // buscarMarca(){
+  //   this.cocheService
+  //   .queryE(this.searchString,{
+  //     page: -1 ,
+  //     size:this.itemsPerPage,
+  //     sort:this.sort()
+  //     ...crieria
+  //   })
+  //   .subscribe(
+  //     (res: HttpResponse<ICoche[]>) => {
+  //       this.isLoading = false;
+
+  //     },
+  //     () => {
+  //       this.isLoading = false;
+  //       (res: HttpErrorResponse)=>this.onError();
+  //     }
+  //   );
+  // }
 
   ngOnInit(): void {
     this.handleNavigation();
