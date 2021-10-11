@@ -150,9 +150,17 @@ public class CocheResource {
     @GetMapping("/coches")
     public ResponseEntity<List<Coche>> getAllCoches(CriteriaDTO criteria, Pageable pageable) {
         log.debug("REST request to get a page of Coches");
-        Page<Coche> page = cocheRepository.findAll(CocheSpecification.searchingParam(criteria.getMarca()), pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
-        return ResponseEntity.ok().headers(headers).body(page.getContent());
+        log.debug("test {}", criteria.getMarca());
+
+        if (criteria.getMarca() == null) {
+            Page<Coche> page = cocheRepository.findAll(pageable);
+            HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+            return ResponseEntity.ok().headers(headers).body(page.getContent());
+        } else {
+            Page<Coche> page = cocheRepository.findAll(CocheSpecification.searchingParam(criteria), pageable);
+            HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+            return ResponseEntity.ok().headers(headers).body(page.getContent());
+        }
     }
 
     @GetMapping("/cochesD")

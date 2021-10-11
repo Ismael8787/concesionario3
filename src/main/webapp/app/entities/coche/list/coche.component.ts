@@ -41,7 +41,7 @@ export class CocheComponent implements OnInit {
         page: pageToLoad - 1,
         size: this.itemsPerPage,
         sort: this.sort(),
-        ...{ marca: 'Morado' },
+        ...{ marca: this.searchString },
       })
       .subscribe(
         (res: HttpResponse<ICoche[]>) => {

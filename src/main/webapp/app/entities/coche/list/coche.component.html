@@ -1,22 +1,13 @@
 <div>
   <h2 id="page-heading" data-cy="CocheHeading">
     <span jhiTranslate="concesionario3App.coche.home.title">Coches</span>
-
+    <input type="text" class="form-control" [(ngModel)]="searchString" (ngModelChange)="loadPage()" />
     <div class="d-flex justify-content-end">
       <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
         <span jhiTranslate="concesionario3App.coche.home.refreshListLabel">Refresh List</span>
       </button>
-      <input
-        type="text"
-        class="form-control"
-        name="marca"
-        id="field_marca"
-        data-cy="marca"
-        formControlName="marca"
-        [(ngModel)]="searchString"
-        (ngModelChange)="(loadPage)"
-      />
+
       <button
         *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_VENDEDOR']"
         ngbDropdown
