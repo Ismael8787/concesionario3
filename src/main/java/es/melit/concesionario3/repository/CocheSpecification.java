@@ -3,13 +3,6 @@ package es.melit.concesionario3.repository;
 import es.melit.concesionario3.domain.Coche;
 import es.melit.concesionario3.domain.Coche_;
 import es.melit.concesionario3.service.dto.CriteriaDTO;
-import java.util.ArrayList;
-import java.util.List;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Expression;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
@@ -43,7 +36,7 @@ public interface CocheSpecification extends JpaSpecificationExecutor<Coche> {
         if (Marca != null) {
             if (Marca.buscarLongitud() == 1) {
                 if (Marca.getArray(0) != null) {
-                    specification = specification.and(marcaLike(Marca.getArray(0)));
+                    specification = specification.and(marcaLike(Marca.getArray(0)).or(modeloLike(Marca.getArray(0))));
                 }
             }
             if (Marca.buscarLongitud() > 1) {
@@ -57,10 +50,10 @@ public interface CocheSpecification extends JpaSpecificationExecutor<Coche> {
     }
 
     public static Specification<Coche> marcaLike(String name) {
-        return (root, query, criteriaBuilder) -> criteriaBuilder.like(root.get(Coche_.MARCA), name + "%");
+        return (root, query, criteriaBuilder) -> criteriaBuilder.like(root.get(Coche_.MARCA), "%" + name + "%");
     }
 
     public static Specification<Coche> modeloLike(String name) {
-        return (root, query, criteriaBuilder) -> criteriaBuilder.like(root.get(Coche_.MODELO), name + "%");
+        return (root, query, criteriaBuilder) -> criteriaBuilder.like(root.get(Coche_.MODELO), "%" + name + "%");
     }
 }

@@ -5,11 +5,12 @@ import { combineLatest } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { ICoche } from '../coche.model';
-
+import { fromEvent } from 'rxjs';
 import { ASC, DESC, ITEMS_PER_PAGE, SORT } from 'app/config/pagination.constants';
 import { CocheService } from '../service/coche.service';
 import { CocheDeleteDialogComponent } from '../delete/coche-delete-dialog.component';
-import { filter, debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
+import { filter, debounceTime, distinctUntilChanged, tap, delay } from 'rxjs/operators';
+// import { clearTimeout } from 'timers';
 @Component({
   selector: 'jhi-coche',
   templateUrl: './coche.component.html',
@@ -25,6 +26,8 @@ export class CocheComponent implements OnInit {
   ngbPaginationPage = 1;
   searchString!: string;
   @ViewChild('input') input: ElementRef | undefined;
+  timer?: number;
+
   constructor(
     protected cocheService: CocheService,
     protected activatedRoute: ActivatedRoute,
@@ -44,6 +47,7 @@ export class CocheComponent implements OnInit {
         sort: this.sort(),
         ...{ marca: this.searchString },
       })
+      .pipe(delay(1000))
       .subscribe(
         (res: HttpResponse<ICoche[]>) => {
           this.isLoading = false;
@@ -56,6 +60,10 @@ export class CocheComponent implements OnInit {
       );
   }
 
+  // sendData(val: any){
+  //   clearTimeout(this.timer);
+  //   this.timer=setTimeout(()=>{console.log(val);},500);
+  // }
   // buscarMarca(){
   //   this.cocheService
   //   .queryE(this.searchString,{

@@ -1,7 +1,7 @@
 <div>
   <h2 id="page-heading" data-cy="CocheHeading">
     <span jhiTranslate="concesionario3App.coche.home.title">Coches</span>
-    <input type="text" class="form-control" #input [(ngModel)]="searchString" (ngModelChange)="loadPage()" />
+    <input type="text" class="form-control" #input [(ngModel)]="searchString" (keyup)="loadPage()" />
     <div class="d-flex justify-content-end">
       <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
