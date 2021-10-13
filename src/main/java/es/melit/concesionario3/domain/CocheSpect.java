@@ -30,7 +30,8 @@ public class CocheSpect {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Coche> query = cb.createQuery(Coche.class); //create query object
         Root<Coche> employeeRoot = query.from(Coche.class); //get object representing 'from' part
-        query.select(employeeRoot).where(cb.equal(employeeRoot.get("vendido"), false)); //linking 'select' and 'from' parts, equivalent to 'select t from Employee t;'
+        query.select(employeeRoot).where(cb.equal(employeeRoot.get("vendido"), false)); //linking 'select' and 'from' parts, equivalent to 'select t from Employee t;'7
+
         TypedQuery<Coche> typedQuery = em.createQuery(query);
         List<Coche> coches = typedQuery.getResultList();
 

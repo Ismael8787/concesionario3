@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest } from 'rxjs';
@@ -9,7 +9,7 @@ import { ICoche } from '../coche.model';
 import { ASC, DESC, ITEMS_PER_PAGE, SORT } from 'app/config/pagination.constants';
 import { CocheService } from '../service/coche.service';
 import { CocheDeleteDialogComponent } from '../delete/coche-delete-dialog.component';
-
+import { filter, debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 @Component({
   selector: 'jhi-coche',
   templateUrl: './coche.component.html',
@@ -24,7 +24,7 @@ export class CocheComponent implements OnInit {
   ascending!: boolean;
   ngbPaginationPage = 1;
   searchString!: string;
-
+  @ViewChild('input') input: ElementRef | undefined;
   constructor(
     protected cocheService: CocheService,
     protected activatedRoute: ActivatedRoute,
@@ -37,6 +37,7 @@ export class CocheComponent implements OnInit {
     const pageToLoad: number = page ?? this.page ?? 1;
 
     this.cocheService
+
       .query({
         page: pageToLoad - 1,
         size: this.itemsPerPage,

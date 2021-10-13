@@ -152,15 +152,16 @@ public class CocheResource {
         log.debug("REST request to get a page of Coches");
         log.debug("test {}", criteria.getMarca());
 
-        if (criteria.getMarca() == null) {
-            Page<Coche> page = cocheRepository.findAll(pageable);
-            HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
-            return ResponseEntity.ok().headers(headers).body(page.getContent());
-        } else {
-            Page<Coche> page = cocheRepository.findAll(CocheSpecification.searchingParam(criteria), pageable);
-            HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
-            return ResponseEntity.ok().headers(headers).body(page.getContent());
-        }
+        // if(criteria.getArray(0)=="" && criteria.getArray(1)==""){
+        //       Page<Coche> page = cocheRepository.findAll(pageable);
+        //     HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        //     return ResponseEntity.ok().headers(headers).body(page.getContent());
+        // }else{
+        Page<Coche> page = cocheRepository.findAll(CocheSpecification.encontrarCOches(criteria), pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+        // }
+
     }
 
     @GetMapping("/cochesD")
